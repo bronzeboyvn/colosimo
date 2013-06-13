@@ -25,7 +25,8 @@ register('GET', []) ->
 register('POST', []) ->
     Email = Req:post_param("email"),
     Username = Req:post_param("username"),
-    Password = bcrypt:hashpw(Req:post_param("password"),bcrypt:gen_salt()),
-    ColosimoUser = colosimo_user:new(id, Email, Username, Password),
+    Password = Req:post_param("password"),
+    Hash = user_lib:hash_password(Password),
+    ColosimoUser = colosimo_user:new(id, Email, Username, Hash),
     Result = ColosimoUser:save(),
     {ok, [Result]}.

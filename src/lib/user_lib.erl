@@ -2,7 +2,8 @@
 -compile(export_all).
 
 hash_password(Password)->
-    bcrypt:hashpw(Password, bcrypt:gen_salt()).
+    {ok, Salt} = bcrypt:gen_salt(),
+    bcrypt:hashpw(Password, Salt).
 
 require_login(Req) ->
     case Req:cookie("colosimo_user_id") of
