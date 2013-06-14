@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 
 {% block title %}Colosimo: About Colosimo{% endblock %}
-
+{% block loginout %}
+{% if colosimo_user %}
+<li><a href="/user/logout">Logout</a></li>
+{% else %}
+<li><a href="/user/login">Login</a></li>
+{% endif %}
+{% endblock %}
 {% block content %}
 <h1>About Colosimo</h1>
 <p>Colosimo was an early Chicago Boss, and likewise the Colosimo project is an example of an early project with the Chicago Boss framework.</p>

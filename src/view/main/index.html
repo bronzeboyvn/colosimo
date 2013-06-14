@@ -1,15 +1,21 @@
 {% extends "base.html" %}
 
 {% block title %}Colosimo{% endblock %}
-
+{% block loginout %}
+{% if colosimo_user %}
+<li><a href="/user/logout">Logout</a></li>
+{% else %}
+<li><a href="/user/login">Login</a></li>
+{% endif %}
+{% endblock %}
 {% block content %}
 <h1>Welcome to Colosimo!</h1>
 {% if colosimo_user %}
-<p>Glad you could stop by, {{ colosimo_user.username }}.</p>
+<p>Glad you could stop by, {{ colosimo_user.username }}</p>
 {% endif %}
 <p>Colosimo is a Chicago Boss sample project that displays PostgreSQL usage, basic templating, user registration/login, and bcrypt (using <a href="https://github.com/mrinalwadhwa/erlang-bcrypt">erlang-bcrypt</a>).</p>
 {% if not colosimo_user %}
-<p>You should <a href="/user/register">register</a>, it will be fun.</p>
+<p>You should <a href="/main/register">register</a>, it will be fun.</p>
 {% endif %}
 {% endblock %}
 

@@ -19,14 +19,8 @@ login('POST', []) ->
             {ok, [{error, "Authentication error"}]}
     end.
 
-register('GET', []) ->
-    {ok, []};
-
-register('POST', []) ->
-    Email = Req:post_param("email"),
-    Username = Req:post_param("username"),
-    Password = Req:post_param("password"),
-    Hash = user_lib:hash_password(Password),
-    ColosimoUser = colosimo_user:new(id, Email, Username, Hash),
-    Result = ColosimoUser:save(),
-    {ok, [Result]}.
+logout('GET', []) ->
+    {redirect, "/",
+        [mochiweb_cookies:cookie("colosimo_user_id", "", [{path, "/"}]),
+	 mochiweb_cookies:cookie("session_id", "", [{path, "/"}])]
+    }.

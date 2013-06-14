@@ -17,8 +17,9 @@
   <ul>
     <li><a href="/">Home</a></li>
     <li><a href="/about">About</a></li>
-    <li><a href="/user/register">Register</a></li>
-    <li><a href="/user/login">Login</a></li>
+    <li><a href="/main/register">Register</a></li>
+    {% block loginout %}
+    {% endblock %}
   </ul>
 </nav>
 {% block content %}{% endblock %}

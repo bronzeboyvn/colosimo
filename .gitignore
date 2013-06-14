@@ -1,4 +1,3 @@
 ebin/
 log/
 erl_crash.dump
-boss.config

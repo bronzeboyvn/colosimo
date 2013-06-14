@@ -7,11 +7,23 @@ before_(_) ->
 index('GET', [], ColosimoUser) ->
   {ok, [{colosimo_user, ColosimoUser}]}.
 
-nope('GET', []) ->
+nope('GET', [], _) ->
   {ok, []}.
 
-oops('GET', []) ->
+oops('GET', [], _) ->
   {ok, []}.
 
-about('GET', []) ->
-  {ok, []}.
+about('GET', [], ColosimoUser) ->
+  {ok, [{colosimo_user, ColosimoUser}]}.
+
+register('GET', [], ColosimoUser) ->
+  {ok, [{colosimo_user, ColosimoUser}]};
+
+register('POST', [], ColosimoUser) ->
+  Email = Req:post_param("email"),
+  Username = Req:post_param("username"),
+  Password = Req:post_param("password"),
+  Hash = user_lib:hash_password(Password),
+  ColosimoUser = colosimo_user:new(id, Email, Username, Hash),
+  Result = ColosimoUser:save(),
+  {ok, [Result]}.
