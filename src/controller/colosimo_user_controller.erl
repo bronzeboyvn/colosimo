@@ -19,6 +19,20 @@ login('POST', []) ->
             {ok, [{error, "Authentication error"}]}
     end.
 
+login2('GET', []) ->
+    Form = boss_form:new(login_form, []),
+    {ok, [{form, Form}, {redirect, Req:header(referer)}]};
+
+login2('POST', []) ->
+    Form = boss_form:new(login_form, []),
+    case boss_form:validate(Form, Req:post_params()) of
+        {ok, LoginCookies} ->
+            {redirect, proplists:get_value("redirect",
+                    Req:post_params(), "/"), LoginCookies};
+	{error, FormWithErrors} ->
+            {ok, [{form, FormWithErrors}]}
+    end.
+
 logout('GET', []) ->
     {redirect, "/",
         [mochiweb_cookies:cookie("colosimo_user_id", "", [{path, "/"}]),
