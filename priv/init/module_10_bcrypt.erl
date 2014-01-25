@@ -5,4 +5,4 @@ init() ->
     bcrypt:start(). 
 
 stop() -> 
-    crypto:stop().
+    bcrypt:stop().
