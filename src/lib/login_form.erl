@@ -9,7 +9,7 @@ form_fields() ->
                 {min_length, 5},
                 {max_length, 255},
                 {html_options, [{class, "form-control"},
-                                {placeholder, "Email address"},
+                                {placeholder, "Username"},
                                 {autofocus, autofocus},
 				{required, required}]}]},
     {password, [{type, char_field},
